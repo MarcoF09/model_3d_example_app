@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:local_assets_server/local_assets_server.dart';
-import 'package:model3dexampleapp/helpers/html_generator.dart';
 import 'package:model3dexampleapp/widgets/web_view_container.dart';
 
 class Model3D extends StatefulWidget {
@@ -21,18 +19,20 @@ class _Model3DState extends State<Model3D> {
 
   @override
   initState() {
-    _initHtml();
+    // _initHtml();
     _initServer();
 
     super.initState();
   }
 
-  _initHtml() async {
-    final template = await rootBundle.loadString('assets/template/index.html');
-    HtmlGenerator generator =
-        new HtmlGenerator(template: template, url: 'model/out.glb');
-    generator.generate();
-  }
+  // _initHtml() async {
+    // await rootBundle.loadString('assets/template/index.html');
+    // The HTMLGenerator has work in progress, the idea is to generate the html dynamically to have
+    // a better usage experience
+    // HtmlGenerator generator =
+    //     new HtmlGenerator(template: template, url: 'model/out.glb');
+    // generator.generate();
+  // }
 
   _initServer() async {
     final server = new LocalAssetsServer(

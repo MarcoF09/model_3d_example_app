@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:convert';
 
 class WebViewContainer extends StatefulWidget {
   final url;
@@ -18,13 +16,11 @@ class _WebViewContainerState extends State<WebViewContainer> {
 
   _WebViewContainerState(this._url);
 
-  WebViewController _controller;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('WebView Test'),
+        title: Text('Test'),
       ),
       body: Column(
         children: [
@@ -32,25 +28,14 @@ class _WebViewContainerState extends State<WebViewContainer> {
             child: WebView(
               key: _key,
               javascriptMode: JavascriptMode.unrestricted,
-//              initialUrl: 'about:blank',
               debuggingEnabled: true,
               initialUrl: _url,
               onWebViewCreated: (WebViewController webViewController) {
-                _controller = webViewController;
-//                _loadHtmlFromAssets();
               },
-//              initialUrl: _url,
             ),
           ),
         ],
       ),
     );
-  }
-
-  _loadHtmlFromAssets() async {
-    String fileText = await rootBundle.loadString('assets/index.html');
-    _controller.loadUrl(Uri.dataFromString(fileText,
-            mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
-        .toString());
   }
 }
